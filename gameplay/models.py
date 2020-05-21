@@ -66,7 +66,7 @@ class Card(models.Model):
 	word = models.CharField(max_length=128)
 	status = models.CharField(choices=CardStatus.choices(), max_length=10)
 	type = models.CharField(choices=CardType.choices(), max_length=10)
-	board = models.ForeignKey(Board)
+	board = models.ForeignKey(Board, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.word
