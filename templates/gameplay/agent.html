@@ -1,5 +1,5 @@
 {% extends "gameplay/base.html" %}
-{% load staticfiles %} 
+{% load static %} 
 {% block endturn %}
 {% if board.turn == "Turn.BLUEAGENT" %}
 <form id="end_turn" method="post" action="/gameplay/{{ board.id }}/blue_agent/end_turn/">
