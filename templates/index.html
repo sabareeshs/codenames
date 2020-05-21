@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %} 
+<html>
+		<head>
+				<title>CODENAMES</title>
+				<link rel="stylesheet" href="{% static "styles.css" %}">
+		</head>
+		<body>
+			<h1>Welcome to CODENAMES Online</h1>
+			<h2>Past games</h1>
+			<ul>
+				{% for board in boards %}
+						<li>{{ board.name }} {{ board.status }}
+							<a href="gameplay/{{ board.id }}/blue_master">Blue Master</a>
+							<a href="gameplay/{{ board.id }}/blue_agent">Blue Agent</a>
+							<a href="gameplay/{{ board.id }}/red_master">Red Master</a>
+							<a href="gameplay/{{ board.id }}/red_agent">Red Agent</a>
+							<a href="gameplay/{{ board.id }}/delete">Delete</a>
+						</li>
+				{% endfor %}
+			</ul>
+			<a method="post" href="/gameplay/create_board">Start a new game</a><br />
+		</body>
+</html>

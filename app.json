@@ -1,0 +1,22 @@
+{
+  "name": "Codenames",
+  "description": "A barebones implementation of the codenames game",
+  "image": "heroku/python",
+  "repository": "https://github.com/sabareeshs/codenames",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python manage.py collectstatic --noinput",
+        "test": "python manage.py test"
+      }
+    }
+  }
+}

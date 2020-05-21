@@ -1,0 +1,33 @@
+{% extends "gameplay/base.html" %}
+{% load staticfiles %} 
+{% block endturn %}
+{% if board.turn == "Turn.BLUEAGENT" %}
+<form id="end_turn" method="post" action="/gameplay/{{ board.id }}/blue_agent/end_turn/">
+{% else %}
+<form id="end_turn" method="post" action="/gameplay/{{ board.id }}/red_agent/end_turn/">
+{% endif %}
+	{% csrf_token %}
+	<div style="text-align: center">
+			<input type="submit" value="End Turn">
+	</div>
+</form>
+{% endblock %}
+<br>
+{% block clicker %}
+		{% if board.turn == "Turn.BLUEAGENT" %}
+		<form id="board_form_{{ card }}" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/blue_agent/">
+		{% else %}
+		<form id="board_form_{{ card }}" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/red_agent/">
+		{% endif %}
+		{% csrf_token %}
+		{% if card.status == "CardStatus.OPEN" %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+		{% else %}
+			{% if card.type == "CardType.BLUE" %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #72A4D2;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+			{% else %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #FF3346;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+			{% endif %}
+		{% endif %}
+		</form>
+{% endblock %}

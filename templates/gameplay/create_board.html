@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CODENAMES</title>
+	</head>
+	<body>
+		<h1>Start a Game</h1>
+		<div>
+			<form id="board_form" method="post" action="/gameplay/create_board/">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="OK">
+			</form>
+		</div>
+	</body>
+</html>

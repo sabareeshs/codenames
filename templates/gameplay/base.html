@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta http-equiv="refresh" content="10"> 
+{% load staticfiles %} 
+<html>
+        <head>
+                <title>CODENAMES</title>
+                <link rel="stylesheet" href="{% static "styles.css" %}">
+        </head>
+        <body style="background-color: azure">
+        <h3 style="text-align:center"> Red : {{ board.redscore }} &emsp; Blue : {{ board.bluescore }} </h3>
+		{% if is_turn %}
+        <h3 style="text-align:center"> Your Turn! </h3>
+		{% else %}
+        <h3 style="text-align:center"> {{ board.turn|slice:"5:" }} is playing! </h3>
+		{% endif %}
+		{% if board.num_clues > 0 %}
+        <h3 style="text-align:center"> Clue : {{ board.clue }} </h3>
+		<h3 style="text-align:center"> Clue targets : {{ board.num_clues }}</h3>
+        <h3 style="text-align:center"> Number clicked : {{ board.num_clicks }}</h3>
+		{% endif %}
+		{% block clues %}
+		{% endblock %}
+		{% if is_turn %}
+				{% block endturn %}
+				<form id="end_turn" method="post" action="/gameplay/{{ board.id }}/end_turn/">
+					{% csrf_token %}
+					<input type="submit" value="End Turn">
+				</form>
+				{% endblock %}
+		{% endif %}
+		<br>
+		{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+		        {{ message }}
+		    </li>
+		    {% endfor %}
+		</ul>
+{% endif %}
+		{% if board.status == "BoardStatus.INPROGRESS" %}
+		<div style="margin-left:10%">
+                        {% for card in cards %}
+								{% block clicker %}
+								{% endblock %}
+                        {% endfor %}
+		</div>
+		{% elif board.status == "BoardStatus.REDWIN" %}
+        <h3> Game Over! Red WINS!! </h3>
+		{% elif board.status == "BoardStatus.BLUEWIN" %}
+        <h3> Game Over! Blue WINS!! </h3>
+		{% elif board.status == "BoardStatus.DRAW" %}
+        <h3> Game ended in a DRAW!! </h3>
+		{% endif %}
+        </body>
+</html>

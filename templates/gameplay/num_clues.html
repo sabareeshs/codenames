@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CODENAMES</title>
+	</head>
+	<body>
+		<h1>CLUE</h1>
+		<div>
+			<form id="num_clues" method="post" action="/gameplay/{{ board.id }}/num_clues/">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="OK">
+			</form>
+		</div>
+	</body>
+</html>

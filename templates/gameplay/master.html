@@ -1,0 +1,40 @@
+{% extends "gameplay/base.html" %}
+{% load staticfiles %}
+
+{% block clues %}
+{% if is_turn %}
+	<a method="post" href="/gameplay/{{ board.id }}/num_clues/"><p style="text-align:center">Set/Edit clue</p></a>
+{% endif %}
+{% endblock %}
+
+{% block endturn %}
+{% if board.num_clues > 0 %}
+	{% if board.turn == "Turn.BLUEMASTER" %}
+	<form id="end_turn" method="post" action="/gameplay/{{ board.id }}/blue_master/end_turn/">
+	{% else %}
+	<form id="end_turn" method="post" action="/gameplay/{{ board.id }}/red_master/end_turn/">
+	{% endif %}
+		{% csrf_token %}
+		<div style="text-align: center">
+				<input type="submit" value="End Turn">
+		</div>
+	</form>
+{% endif %}
+{% endblock %}
+
+{% block clicker %}
+		{% if board.turn == "Turn.BLUEMASTER" %}
+		<form id="board_form" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/blue_master/">
+		{% else %}
+		<form id="board_form" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/red_master/">
+		{% endif %}
+		{% csrf_token %}
+		{% if card.type == "CardType.BLUE" %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #72A4D2;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+		{% elif card.type == "CardType.RED" %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #FF3346;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+		{% else %}
+		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #FFFFFF;text-align: center"> <img width="100%" src="{% static "images/danger.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+		{% endif %}
+		</form>
+{% endblock %}
