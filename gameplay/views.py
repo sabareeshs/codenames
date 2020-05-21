@@ -25,7 +25,7 @@ def new_board(name):
 	board = Board.objects.get_or_create(name=name)
 	board[0].save()
 	words = get_words()
-	words_per_color = int(words/2)
+	words_per_color = int(len(words)/2)
 	type = []
 	for i in range(words_per_color):
 		type.append(CardType.RED)
