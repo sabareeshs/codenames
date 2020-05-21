@@ -27,7 +27,7 @@ SECRET_KEY = 'y@kyo$#0hs41+!+!)hu4^i34v7*eftqb_^_p&_j0%p^7zd62b^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'murmuring-ocean-58322.herokuapp.com' ]
+ALLOWED_HOSTS = [ 'localhost', 'murmuring-ocean-58322.herokuapp.com' ]
 
 
 # Application definition
