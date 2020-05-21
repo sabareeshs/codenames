@@ -30,11 +30,7 @@ def new_board(name):
 		type.append(CardType.RED)
 		type.append(CardType.BLUE)
 	type.append(CardType.WHITE)
-	print "Colors"
-	print (type)
 	random.shuffle(type)
-	print "Colors"
-	print (type)
 	for i in range(len(words)):
 		card = Card.objects.get_or_create(word=words[i].strip(), status=CardStatus.OPEN, type=type[i], board=board[0])
 		card[0].type = type[i]
@@ -97,7 +93,6 @@ def board(request, board_id, player):
 
 def change_turn(board, force=False):
 	if force or (board.num_clicks >= board.num_clues):
-		print ("Changing", board.num_clicks, board.num_clues)
 		if board.turn == "Turn.BLUEMASTER":
 			board.turn = Turn.BLUEAGENT
 		elif board.turn == "Turn.BLUEAGENT":
@@ -116,7 +111,6 @@ def change_turn(board, force=False):
 def end_turn(request, board_id, player):
 	board = Board.objects.get(id=board_id)
 	if is_turn(player, board):
-		print ("Ending")
 		change_turn(board, force=True)
 	return redirect('board', board_id=board_id, player=player)
 
