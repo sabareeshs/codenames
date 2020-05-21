@@ -10,7 +10,7 @@
 			<h2>Past games</h1>
 			<ul>
 				{% for board in boards %}
-						<li>{{ board.name }} {{ board.status }}
+						<li>{{ board.name }} {{ board.status|slice:"12:" }}
 							<a href="gameplay/{{ board.id }}/blue_master">Blue Master</a>
 							<a href="gameplay/{{ board.id }}/blue_agent">Blue Agent</a>
 							<a href="gameplay/{{ board.id }}/red_master">Red Master</a>
