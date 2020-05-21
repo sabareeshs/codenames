@@ -29,15 +29,15 @@ class BoardStatus(Enum):
 
 # Create your models here.
 class Board(models.Model):
-	turn = models.CharField(choices=Turn.choices(), max_length=10, default=(Turn.BLUEMASTER if random.getrandbits(1) else Turn.REDMASTER))
-	status = models.CharField(choices=BoardStatus.choices(), max_length=10, default=BoardStatus.INPROGRESS)
+	turn = models.CharField(max_length=255, choices=Turn.choices(), default=(Turn.BLUEMASTER if random.getrandbits(1) else Turn.REDMASTER))
+	status = models.CharField(max_length=255, choices=BoardStatus.choices(), default=BoardStatus.INPROGRESS)
 	bluescore = models.IntegerField(default=0)
 	redscore = models.IntegerField(default=0)
 	num_clues = models.IntegerField(default=-1)
 	num_clicks = models.IntegerField(default=-1)
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	name = models.CharField(max_length=128, default=id)
-	clue = models.CharField(max_length=128, default="")
+	name = models.CharField(max_length=255, default=id)
+	clue = models.CharField(max_length=255, default="")
 	
 	def __str__(self):
 		return str(self.name)
@@ -63,9 +63,9 @@ class CardType(Enum):
 		return tuple((i.name, i.value) for i in cls)
 
 class Card(models.Model):
-	word = models.CharField(max_length=128)
-	status = models.CharField(choices=CardStatus.choices(), max_length=10)
-	type = models.CharField(choices=CardType.choices(), max_length=10)
+	word = models.CharField(max_length=255)
+	status = models.CharField(max_length=255, choices=CardStatus.choices())
+	type = models.CharField(max_length=255, choices=CardType.choices())
 	board = models.ForeignKey(Board, on_delete=models.CASCADE)
 
 	def __str__(self):
