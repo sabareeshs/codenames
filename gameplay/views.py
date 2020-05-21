@@ -25,13 +25,14 @@ def new_board(name):
 	board = Board.objects.get_or_create(name=name)
 	board[0].save()
 	words = get_words()
+	words_per_color = int(words/2)
 	type = []
-	for i in range(len(words)/2):
+	for i in range(words_per_color):
 		type.append(CardType.RED)
 		type.append(CardType.BLUE)
 	type.append(CardType.WHITE)
 	random.shuffle(type)
-	for i in range(len(words)):
+	for i in range(words_per_color):
 		card = Card.objects.get_or_create(word=words[i].strip(), status=CardStatus.OPEN, type=type[i], board=board[0])
 		card[0].type = type[i]
 		card[0].status = CardStatus.OPEN
