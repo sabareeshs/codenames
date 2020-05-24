@@ -22,12 +22,6 @@
 		{% csrf_token %}
 		{% if card.status == "CardStatus.OPEN" %}
 		<button form="board_form_{{ card }}" style="float: left; width: 18%;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
-		{% else %}
-			{% if card.type == "CardType.BLUE" %}
-		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #72A4D2;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
-			{% else %}
-		<button form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #FF3346;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
-			{% endif %}
 		{% endif %}
 		</form>
 {% endblock %}
