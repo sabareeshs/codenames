@@ -21,7 +21,7 @@
 		{% endif %}
 		{% csrf_token %}
 		{% if card.status == "CardStatus.OPEN" %}
-		<button type="button" form="board_form_{{ card }}" style="float: left; width: 18%;text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
+		<button type="button" form="board_form_{{ card }}" style="float: left; width: 18%;background-color: #FFFFFF; text-align: center"> <img width="100%" src="{% static "images/card.jpg" %}" alt="{{ card }}"> <p style="position: relative;top: 0; bottom: 0; left:0; right: 0"> {{ card }} </p> </button>
 		{% endif %}
 		</form>
 {% endblock %}
