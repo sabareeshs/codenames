@@ -15,9 +15,9 @@
 <br>
 {% block clicker %}
 		{% if board.turn == "Turn.BLUEAGENT" %}
-		<form id="board_form_{{ card }}" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/blue_agent/">
+		<form id="board_form" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/blue_agent/">
 		{% else %}
-		<form id="board_form_{{ card }}" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/red_agent/">
+		<form id="board_form" method="get" action="/gameplay/{{ board.id }}/card/{{ card }}/red_agent/">
 		{% endif %}
 		{% csrf_token %}
 		{% if card.status == "CardStatus.OPEN" %}
