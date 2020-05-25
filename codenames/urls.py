@@ -19,7 +19,7 @@ from django.conf.urls import include
 from gameplay import views
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
+	url(r'^$', views.index, name='home_index'),
 	url(r'^gameplay/', include('gameplay.urls')),
     url(r'^admin/', admin.site.urls),
 ]

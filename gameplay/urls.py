@@ -2,7 +2,7 @@ from django.conf.urls import url
 from gameplay import views
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
+	url(r'^$', views.index, name='gameplay_index'),
 	url(r'^create_board/$', views.create_board, name='create_board'),
 	url(r'^(?P<board_id>[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12})/delete/$', views.delete, name='delete'),
 	url(r'^(?P<board_id>[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12})/num_clues/$', views.num_clues, name='num_clues'),
