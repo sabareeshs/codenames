@@ -136,7 +136,10 @@ def card_click(request, board_id, word, player):
 		else:
 			messages.info(request, 'Sorry!! That is wrong.')
 			end_turn = True
-		if len(Card.objects.filter(board=board).filter(status="CardStatus.CLOSED")) == 24:
+		closed_cards = Card.objects.filter(board=board).filter(status="CardStatus.CLOSED")
+		closed_blue_cards = closed_cards.filter(type="CardType.BLUE")
+		closed_red_cards = closed_cards.filter(type="CardType.RED")
+		if len(closed_blue_cards) == 12 or len(closed_red_cards) == 12:
 			if board.bluescore > board.redscore:
 				board.status = BoardStatus.BLUEWIN
 			elif board.redscore > board.bluescore:
