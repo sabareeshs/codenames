@@ -81,7 +81,7 @@ def delete(request, board_id):
 	Board.objects.filter(id=board_id).delete()
 	boards = Board.objects.all()[:10]
 	context_dict = {'boards': boards}
-	return render(request, 'index.html', context=context_dict)
+	return redirect('index')
 	
 def board(request, board_id, player):
 	board = Board.objects.get(id=board_id)
