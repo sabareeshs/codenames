@@ -31,14 +31,12 @@
 		{% endif %}
 		<br>
 		{% if messages %}
-		<ul class="messages">
-		    {% for message in messages %}
-		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-		        {{ message }}
-		    </li>
-		    {% endfor %}
-		</ul>
-{% endif %}
+   			<script>
+    			{% for message in messages %}
+        			alert("{{ message }}");
+    			{% endfor %}
+   			</script>
+		{% endif %}
 		{% if board.status == "BoardStatus.INPROGRESS" %}
 		<div style="margin-left:10%">
                         {% for card in cards %}
@@ -47,11 +45,11 @@
                         {% endfor %}
 		</div>
 		{% elif board.status == "BoardStatus.REDWIN" %}
-        <h3> Game Over! Red WINS!! </h3>
+        <h3 style="text-align: center"> Game Over! Red WINS!! </h3>
 		{% elif board.status == "BoardStatus.BLUEWIN" %}
-        <h3> Game Over! Blue WINS!! </h3>
+        <h3 style="text-align: center"> Game Over! Blue WINS!! </h3>
 		{% elif board.status == "BoardStatus.DRAW" %}
-        <h3> Game ended in a DRAW!! </h3>
+        <h3 style="text-align: center"> Game ended in a DRAW!! </h3>
 		{% endif %}
         </body>
 </html>

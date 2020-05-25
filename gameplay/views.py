@@ -126,12 +126,15 @@ def card_click(request, board_id, word, player):
 		card.save()
 		if card.type == "CardType.BLUE" and player == "blue_agent":
 			board.bluescore = board.bluescore + 1
+			messages.info(request, 'Congrats!! That is correct.')
 		elif card.type == "CardType.RED" and player == "red_agent":
 			board.redscore = board.redscore + 1
+			messages.info(request, 'Congrats!! That is correct.')
 		elif card.type == "CardType.WHITE":
 			board.status = BoardStatus.BLUEWIN if player == "red_agent" else BoardStatus.REDWIN 
 			messages.info(request, 'You lost by revealing the Taboo card!!.')
 		else:
+			messages.info(request, 'Sorry!! That is wrong.')
 			end_turn = True
 		if len(Card.objects.filter(board=board).filter(status="CardStatus.CLOSED")) == 24:
 			if board.bluescore > board.redscore:
