@@ -22,6 +22,9 @@ def get_words():
 	return random.sample(file.readlines(), 25)
 
 def new_board(name):
+	qs = Board.objects.filter(name=name)
+	if qs.exists():
+		raise Exception('Board exists, try a different name')
 	board = Board.objects.get_or_create(name=name)
 	board[0].save()
 	words = get_words()
@@ -63,11 +66,12 @@ def create_board(request):
 	if request.method == 'POST':
 		form = BoardForm(request.POST)
 		if form.is_valid():
-			board = new_board(name=form.cleaned_data['name'])
-			if board.turn == "Turn.BLUEMASTER":
-				return redirect('/gameplay/' + str(board.id) + '/blue_master')
-			else:
-				return redirect('/gameplay/' + str(board.id) + '/red_master')
+			try:
+				board = new_board(name=form.cleaned_data['name'])
+				messages.info(request, 'Share the URLs and start playing. ' + str(board.turn)[5:] + ' should start.')
+				return redirect('home_index')
+			except Exception as error:
+				messages.error(request, str(error))
 	form = BoardForm()
 	return render(request, 'gameplay/create_board.html', {'form': form})
 

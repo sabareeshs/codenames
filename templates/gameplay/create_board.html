@@ -4,6 +4,14 @@
 		<title>CODENAMES</title>
 	</head>
 	<body>
+		{% if messages %}
+				<script>
+					{% for message in messages %}
+						alert("{{ message }}");
+					{% endfor %}
+				</script>
+		{% endif %}
+
 		<h1>Start a Game</h1>
 		<div>
 			<form id="board_form" method="post" action="/gameplay/create_board/">

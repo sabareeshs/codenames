@@ -20,6 +20,15 @@
 						</li>
 				{% endfor %}
 			</ul>
+
+			{% if messages %}
+					<script>
+						{% for message in messages %}
+							alert("{{ message }}");
+						{% endfor %}
+					</script>
+			{% endif %}
+
 			<a method="post" href="/gameplay/create_board">Start a new game</a><br />
 		</body>
 </html>
